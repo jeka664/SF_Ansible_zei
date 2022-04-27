@@ -1,0 +1,5 @@
+  - name: add user
+    user: user=ansible-user group=sudo shell=/bin/bash
+
+  - name: add public key
+    authorized_key: user=ansible-user key="{{ lookup('file', "/home/jeka664/.ssh/id_rsa.pub") }}"
