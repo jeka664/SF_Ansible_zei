@@ -1,0 +1,27 @@
+  - name: install redis
+    ansible.builtin.apt: # имя модуля Ansible
+      name: redis
+      state: present
+      update_cache: yes
+    become: yes
+#  - name: copy config
+#    template:
+#      src: /etc/ansible/playbook/roles/zabbix_agent_install/files/zabbix-agent-template.conf
+#      dest: /etc/zabbix/zabbix_agentd.conf
+#      mode: 0644
+#    become: yes
+#    notify: zabbix-agent systemd
+
+  - name: redis systemd
+    systemd:
+      name: redis.service
+      enabled: yes
+      state: started
+
+
+#    - name: remove zabbix-agent
+#      # apt-get remove redis-server
+#      ansible.builtin.apt:
+#        name: zabbix-agent
+#        state: absent
+#      become: yes
